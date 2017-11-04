@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Wikipedia Viewer</title>
     <script src="https://use.fontawesome.com/8d2ac604a7.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
 
     body, html{
@@ -47,6 +48,25 @@
     let searchBar;
     let searchButton;
 
+    function ajax(term){
+      $.ajax({
+        url: "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + searchBar.value + '&prop=info&inprop=url&utf8=&format=json',
+
+        dataType: 'jsonp',
+        success: function(response){
+          console.log(response);
+          makeList(response);
+        },
+        error: function(){
+          alert('Failure');
+        }
+      })
+    }
+
+    function makeList(response){
+      app.innerHTML=response.query.search[0].title;
+    }
+
     function createSearch(){
       const searchContain = document.createElement('div');
       searchContain.id = "searchContainer"
@@ -68,6 +88,7 @@
     (function init(){
       createSearch();
       idAssign();
+      searchButton.addEventListener('click', ajax);
     })();
 
     </script>
