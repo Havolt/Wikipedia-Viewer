@@ -135,8 +135,8 @@
       for(var i = 0; i < listItemClass.length; i++){
         (function(i) {
           listItemClass[i].addEventListener('click', function(){
-            console.log(i);
-            //window.open('https://en.wikipedia.org/wiki/' + event.target.textContent);
+            console.log(listItemClass[i].childNodes[0].textContent);
+            window.open('https://en.wikipedia.org/wiki/' + listItemClass[i].childNodes[0].textContent);
             });
 
         }(i))
