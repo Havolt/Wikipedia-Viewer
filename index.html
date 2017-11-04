@@ -9,6 +9,7 @@
 
     body, html{
       background-color: #f7f7f7;
+      font-family: arial;
     }
 
 
@@ -35,6 +36,31 @@
       font-size: 1.8em;
     }
 
+    #listContainer{
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .listItemClass{
+      width: 100%;
+      border-radius: 1%;
+      border: 2px solid #96beff;
+      margin-bottom: 5px;
+    }
+
+    .listItemClass:hover{
+      cursor: pointer;
+    }
+
+    h3{
+      margin-left: 5%;
+    }
+
+    p{
+      font-style: italic;
+      margin-left: 2%;
+    }
+
     </style>
   </head>
   <body>
@@ -47,6 +73,7 @@
 
     let searchBar;
     let searchButton;
+    let listContainer;
 
     function ajax(term){
       $.ajax({
@@ -64,7 +91,22 @@
     }
 
     function makeList(response){
-      app.innerHTML=response.query.search[0].title;
+      if(!listContainer){
+        const listContain = document.createElement('div');
+        listContain.id = "listContainer";
+        app.appendChild(listContain);
+        for(var i = 0; i < response.query.search.length; i++){
+          const listItem = document.createElement('div');
+          listItem.classList="listItemClass";
+          listContain.appendChild(listItem);
+          const lTitle = document.createElement('h3');
+          lTitle.innerHTML = response.query.search[i].title;
+          listItem.appendChild(lTitle);
+          const lDesc = document.createElement('p');
+          lDesc.innerHTML = response.query.search[i].snippet;
+          listItem.appendChild(lDesc);
+        }
+      }
     }
 
     function createSearch(){
