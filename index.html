@@ -128,10 +128,19 @@
     }
 
     function makeLinks(){
+
+      console.log(listItemClass);
+
+
       for(var i = 0; i < listItemClass.length; i++){
-        listItemClass[i].addEventListener('click', function(event){
-          window.open('https://en.wikipedia.org/wiki/' + event.target.textContent);
-          console.log(event)});
+        (function(i) {
+          listItemClass[i].addEventListener('click', function(){
+            console.log(i);
+            //window.open('https://en.wikipedia.org/wiki/' + event.target.textContent);
+            });
+
+        }(i))
+
       }
     }
 
