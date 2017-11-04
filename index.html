@@ -10,13 +10,18 @@
     body, html{
       background-color: #f7f7f7;
       font-family: arial;
+      background-color: #adb9cc;
     }
 
 
     #searchContainer{
       margin: 60px auto;
-      //background-color: blue;
       width: 390px;
+    }
+
+    #app{
+      width: 80%;
+      margin: 0 auto;
     }
 
     #searchButton{
@@ -37,7 +42,6 @@
     }
 
     #listContainer{
-      width: 80%;
       margin: 0 auto;
     }
 
@@ -46,6 +50,7 @@
       border-radius: 1%;
       border: 2px solid #96beff;
       margin-bottom: 5px;
+      background-color: #f7f7f7;
     }
 
     .listItemClass:hover{
@@ -71,9 +76,11 @@
 
     <script>
 
+    const app = document.getElementById('app');
     let searchBar;
     let searchButton;
     let listContainer;
+    let prevSearch = false;
 
     function ajax(term){
       $.ajax({
@@ -91,7 +98,7 @@
     }
 
     function makeList(response){
-      if(!listContainer){
+      if(!prevSearch){
         const listContain = document.createElement('div');
         listContain.id = "listContainer";
         app.appendChild(listContain);
@@ -99,12 +106,16 @@
           const listItem = document.createElement('div');
           listItem.classList="listItemClass";
           listContain.appendChild(listItem);
+          listContain.addEventListener('click', function(){
+            window.open('http://www.google.com');
+          })
           const lTitle = document.createElement('h3');
           lTitle.innerHTML = response.query.search[i].title;
           listItem.appendChild(lTitle);
           const lDesc = document.createElement('p');
           lDesc.innerHTML = response.query.search[i].snippet;
           listItem.appendChild(lDesc);
+          prevSearch = true;
         }
       }
     }
