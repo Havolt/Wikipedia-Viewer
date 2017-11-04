@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Wikipedia Viewer</title>
+    <script src="https://use.fontawesome.com/8d2ac604a7.js"></script>
+    <style>
+
+    body, html{
+      background-color: #f7f7f7;
+    }
+
+
+    #searchContainer{
+      margin: 60px auto;
+      //background-color: blue;
+      width: 390px;
+    }
+
+    #searchButton{
+      font-size: 2em;
+      height: 100%;
+      background-color: #4578cc;
+      color: white;
+      border: 2px solid #4578cc;
+    }
+
+    #searchBar{
+      height: 39px;
+      width: 300px;
+      border: 1px solid #96beff;
+      float: left;
+      border-radius: 2%;
+      font-size: 1.8em;
+    }
+
+    </style>
+  </head>
+  <body>
+
+
+    <div id="app"></div>
+
+
+    <script>
+
+    let searchBar;
+    let searchButton;
+
+    function createSearch(){
+      const searchContain = document.createElement('div');
+      searchContain.id = "searchContainer"
+      app.appendChild(searchContain);
+      const searchB = document.createElement('input');
+      searchB.id = "searchBar"
+      searchContain.appendChild(searchB);
+      const searchButt = document.createElement('button');
+      searchButt.innerHTML = "<i class='fa fa-search'></i>";
+      searchButt.id = "searchButton";
+      searchContain.appendChild(searchButt);
+    }
+
+    function idAssign(){
+      searchBar = document.getElementById('searchBar');
+      searchButton = document.getElementById('searchButton');
+    }
+
+    (function init(){
+      createSearch();
+      idAssign();
+    })();
+
+    </script>
+
+  </body>
+</html>
