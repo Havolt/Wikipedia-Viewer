@@ -30,6 +30,7 @@
       background-color: #4578cc;
       color: white;
       border: 2px solid #4578cc;
+      cursor: pointer;
     }
 
     #searchBar{
@@ -55,6 +56,10 @@
 
     .listItemClass:hover{
       cursor: pointer;
+      box-shadow: 0px 0px 10px #ffab3d;
+      background-color: white;
+      border: 2px solid #ffab3d;
+
     }
 
     h3{
@@ -81,6 +86,8 @@
     let searchButton;
     let listContainer;
     let prevSearch = false;
+    let tempResponse;
+    let listItemClass;
 
     function ajax(term){
       $.ajax({
@@ -88,8 +95,11 @@
 
         dataType: 'jsonp',
         success: function(response){
+          tempResponse = response;
           console.log(response);
           makeList(response);
+          listItemClass= document.getElementsByClassName('listItemClass');
+          makeLinks();
         },
         error: function(){
           alert('Failure');
@@ -106,9 +116,6 @@
           const listItem = document.createElement('div');
           listItem.classList="listItemClass";
           listContain.appendChild(listItem);
-          listContain.addEventListener('click', function(){
-            window.open('http://www.google.com');
-          })
           const lTitle = document.createElement('h3');
           lTitle.innerHTML = response.query.search[i].title;
           listItem.appendChild(lTitle);
@@ -117,6 +124,14 @@
           listItem.appendChild(lDesc);
           prevSearch = true;
         }
+      }
+    }
+
+    function makeLinks(){
+      for(var i = 0; i < listItemClass.length; i++){
+        listItemClass[i].addEventListener('click', function(event){
+          window.open('https://en.wikipedia.org/wiki/' + event.target.textContent);
+          console.log(event)});
       }
     }
 
