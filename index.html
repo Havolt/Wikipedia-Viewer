@@ -81,6 +81,8 @@
 
     <script>
 
+    //Need to write app to take further searches
+
     const app = document.getElementById('app');
     let searchBar;
     let searchButton;
@@ -88,6 +90,7 @@
     let prevSearch = false;
     let tempResponse;
     let listItemClass;
+    let firstTime = true;
 
     function ajax(term){
       $.ajax({
@@ -99,7 +102,9 @@
           console.log(response);
           makeList(response);
           listItemClass= document.getElementsByClassName('listItemClass');
+          listContainer = document.getElementById('listContainer');
           makeLinks();
+
         },
         error: function(){
           alert('Failure');
@@ -108,6 +113,11 @@
     }
 
     function makeList(response){
+      if(prevSearch){
+        listContainer.innerHTML = "";
+        listContainer.remove();
+        prevSearch = false;
+      }
       if(!prevSearch){
         const listContain = document.createElement('div');
         listContain.id = "listContainer";
