@@ -15,14 +15,33 @@
 
 
     #searchContainer{
-      margin: 60px auto;
-      width: 390px;
+      margin: 25px auto;
+      width: 355px;
+
     }
 
     #app{
       width: 80%;
       margin: 0 auto;
     }
+
+    #randomButton{
+      width: 351px;
+      font-size: 12px;
+      margin: 50px auto 0 auto;
+      display: block;
+      font-size: 1em;
+      background-color: #4578cc;
+      border: 1px solid #4578cc;
+      color: white;
+    }
+
+    #randomButton:hover{
+      background-color: #ffab3d;
+      border: 1px solid #ffab3d;
+      cursor: pointer;
+    }
+
 
     #searchButton{
       font-size: 2em;
@@ -72,8 +91,9 @@
       box-shadow: 0px 0px 10px #ffab3d;
       background-color: white;
       border: 2px solid #ffab3d;
-
     }
+
+
 
     h3{
       margin-left: 5%;
@@ -104,6 +124,7 @@
     let tempResponse;
     let listItemClass;
     let firstTime = true;
+    let randomButton;
 
     function ajax(term){
       $.ajax({
@@ -168,9 +189,14 @@
     }
 
     function createSearch(){
+      const randomSearch = document.createElement('button');
+      randomSearch.id = "randomButton";
+      randomSearch.innerHTML= "Click Here for Random Article";
+      app.appendChild(randomSearch);
       const searchContain = document.createElement('div');
       searchContain.id = "searchContainer"
       app.appendChild(searchContain);
+
       const searchB = document.createElement('input');
       searchB.id = "searchBar"
       searchContain.appendChild(searchB);
@@ -178,11 +204,13 @@
       searchButt.innerHTML = "<i class='fa fa-search'></i>";
       searchButt.id = "searchButton";
       searchContain.appendChild(searchButt);
+
     }
 
     function idAssign(){
       searchBar = document.getElementById('searchBar');
       searchButton = document.getElementById('searchButton');
+      randomButton = document.getElementById('randomButton');
     }
 
     (function init(){
