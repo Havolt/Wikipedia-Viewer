@@ -38,7 +38,7 @@
 
     #randomButton:hover{
       background-color: #ffab3d;
-      border: 1px solid #ffab3d;
+      border: 1px solid #d69b5c;
       cursor: pointer;
     }
 
@@ -188,10 +188,14 @@
       }
     }
 
+    function openRandom(){
+      window.open('https://en.wikipedia.org/wiki/Special:Random');
+    }
+
     function createSearch(){
       const randomSearch = document.createElement('button');
       randomSearch.id = "randomButton";
-      randomSearch.innerHTML= "Click Here for Random Article";
+      randomSearch.innerHTML= "Click Here for a Random Article";
       app.appendChild(randomSearch);
       const searchContain = document.createElement('div');
       searchContain.id = "searchContainer"
@@ -217,6 +221,7 @@
       createSearch();
       idAssign();
       searchButton.addEventListener('click', ajax);
+      randomButton.addEventListener('click', openRandom);
     })();
 
     </script>
